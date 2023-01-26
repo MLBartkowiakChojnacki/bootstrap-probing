@@ -33,7 +33,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def my_statistic(sample1, sample2, axis):
-    statistic, _ = ttest_ind(sample1, sample2)
+    statistic, p_value = ttest_ind(sample1, sample2)
     return statistic
 
 # 2. load data
@@ -47,6 +47,7 @@ res = bootstrap(data, my_statistic, n_resamples=9999, method='basic')
 
 
 fig, ax = plt.subplots()
-ax.hist(res.bootstrap_distribution, bins=25)
+ax.hist(res.bootstrap_distribution, bins=100)
 plt.show()
 
+#%%
