@@ -24,5 +24,3 @@ stats_method1, stats_method2, p_value = bootstrap(metric, df_uprawa_2021, df_upr
 print(stats_method1)
 print(stats_method2)
 print(p_value)
-
-
