@@ -90,7 +90,7 @@ dif_bootstrap_means
 obs_difs = (np.mean(perms_2021) - np.mean(perms_2022))
 print('observed difference in means: {}'.format(obs_difs))
 
-p_value = dif_bootstrap_means[dif_bootstrap_means >= obs_difs].shape[0]/10000
+p_value = dif_bootstrap_means[dif_bootstrap_means >= obs_difs]
 print('p-value: {}'.format(p_value))
 
 fig = plt.figure(figsize=(10,3))
@@ -148,3 +148,5 @@ plt.axvline(df["X2b"].mean(), color='k', linestyle='dashed', linewidth=2)
 plt.axvline(res_2.confidence_interval[0], color='r', linestyle='dashed', linewidth=1)
 plt.axvline(res_2.confidence_interval[1], color='r', linestyle='dashed', linewidth=1)
 plt.show()
+
+#%%
