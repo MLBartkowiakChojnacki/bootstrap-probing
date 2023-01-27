@@ -8,7 +8,7 @@ Created on Fri Jan 27 22:10:26 2023
 import pandas as pd
 import numpy as np
 import seaborn as sns
-from sklearn.utils import resample
+
 
 #load data
 df = pd.read_csv('ChickData.csv', sep = ';')
