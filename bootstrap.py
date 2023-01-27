@@ -39,8 +39,8 @@ plt.ylabel('Frequency')
 
 plt.show()
 
-print('Area in 2021: {}'.format(df_uprawa_2021.mean()))
-print('Est. area in 2022: {}'.format(df_uprawa_2022.mean()))
+print('Agriculture area in 2021: {}'.format(df_uprawa_2021.mean()))
+print('Est. agriculture area in 2022: {}'.format(df_uprawa_2022.mean()))
 
 area_2021 = []
 for i in range(10000):
@@ -64,7 +64,7 @@ upper_bound = np.percentile(differences, 97.5)
 fig = plt.figure(figsize=(10,3))
 ax = plt.hist(differences, bins=30)
 
-plt.xlabel('Difference in area')
+plt.xlabel('Difference in agriculture area')
 plt.ylabel('Frequency')
 plt.axvline(lower_bound, color='r')
 plt.axvline(upper_bound, color='r')
@@ -87,14 +87,6 @@ for i in range(10000):
 dif_bootstrap_means = (np.mean(perms_2021, axis=1)-np.mean(perms_2022, axis=1))
 dif_bootstrap_means
 
-fig = plt.figure(figsize=(10,3))
-ax = plt.hist(dif_bootstrap_means, bins=30)
-
-plt.xlabel('Difference in Likes')
-plt.ylabel('Frequency')
-plt.title('Bootstrapped Population (Combined data)')
-plt.show()
-
 obs_difs = (np.mean(perms_2021) - np.mean(perms_2022))
 print('observed difference in means: {}'.format(obs_difs))
 
@@ -104,9 +96,10 @@ print('p-value: {}'.format(p_value))
 fig = plt.figure(figsize=(10,3))
 ax = plt.hist(dif_bootstrap_means, bins=30)
 
-plt.xlabel('Difference in area')
+plt.xlabel('Difference in agriculture area')
 plt.ylabel('Frequency')
 plt.axvline(obs_difs, color='r')
+plt.title('Bootstrapped Population (Combined data)')
 plt.show()
 
 if p_value >= 0.05: print('Brak podstaw do odrzucenia H0')
