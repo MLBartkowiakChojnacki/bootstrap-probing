@@ -70,7 +70,7 @@ for prov in province:
     df_uprawa_2021 = df["X2a"][df['Prov'] == prov]
     df_uprawa_2022 = df["X2b"][df['Prov'] == prov]
     
-    stats_method1_21, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=10000)  
+    stats_method1_21, stats_method2_22, p_value = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=10000)  
     woj_1.append(prov)
     woj_2.append(prov)
     avg_1.append(stats_method1_21['avg_metric'])
@@ -79,7 +79,7 @@ for prov in province:
                          round(stats_method1_21['metric_ci_ub'],2)))
     conf_inter_2.append((round(stats_method2_22['metric_ci_lb'],2),
                          round(stats_method2_22['metric_ci_ub'],2)))
-    p_value.append(p_value_22)
+    p_value.append(p_value)
 
 df_sum_yr_delta = pd.DataFrame(data = {'YR-YR': '2021-2022',
                                       'PROV_1': woj_1,
