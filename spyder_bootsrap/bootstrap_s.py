@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 from bstrap import bootstrap
-import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
