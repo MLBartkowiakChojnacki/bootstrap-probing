@@ -19,6 +19,8 @@ province_combinations = [(a, b) for idx, a in enumerate(province) for b in provi
 
 metric = np.mean
 
+#badania istotnosci roznic miedzy deklarowana wielkoscia uprawy
+#dla 2022 roku miedzy wojewodztwami
 woj_1 = []
 woj_2 = []
 avg_1 = []
@@ -32,7 +34,7 @@ for prov in province_combinations:
     df_uprawa_2022_1 = df["X2b"][df['Prov'] == prov[0]]
     df_uprawa_2022_2 = df["X2b"][df['Prov'] == prov[1]]
     
-    stats_method1_22, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2022_1, df_uprawa_2022_2, nbr_runs=100)  
+    stats_method1_22, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2022_1, df_uprawa_2022_2, nbr_runs=10000)  
     woj_1.append(prov[0])
     woj_2.append(prov[1])
     avg_1.append(stats_method1_22['avg_metric'])
@@ -53,7 +55,8 @@ df_sum_prov_comb = pd.DataFrame(data = {'YR-YR': '2022-2022',
                                       'P_VALUE': p_value})
     
 
-#dla jakich wojewodztw rok-rok jest istotna zmiana
+#badanie istotnosci roznic miedzy wielkoscia uprawy w 2021 a deklarowana
+#wielkoscia uprawy a 2022 dla wojewodztw
 woj_1 = []
 woj_2 = []
 avg_1 = []
@@ -67,7 +70,7 @@ for prov in province:
     df_uprawa_2021 = df["X2a"][df['Prov'] == prov]
     df_uprawa_2022 = df["X2b"][df['Prov'] == prov]
     
-    stats_method1_21, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=100)  
+    stats_method1_21, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=10000)  
     woj_1.append(prov)
     woj_2.append(prov)
     avg_1.append(stats_method1_21['avg_metric'])
