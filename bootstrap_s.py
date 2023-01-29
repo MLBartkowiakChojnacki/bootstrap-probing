@@ -5,7 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 
-#!pip install bstrap
+#instalacja paczaki bstrap
+!pip install bstrap
 
 #ustawienie folderu robozego
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
