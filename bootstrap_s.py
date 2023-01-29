@@ -3,6 +3,12 @@ import numpy as np
 from bstrap import bootstrap
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+
+#!pip install bstrap
+
+#ustawienie folderu robozego
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #ladowanie danych
 df = pd.read_csv(r'data/raw/Grupa.1.csv', sep = ';')
@@ -34,7 +40,7 @@ for prov in province_combinations:
     df_uprawa_2022_1 = df["X2b"][df['Prov'] == prov[0]]
     df_uprawa_2022_2 = df["X2b"][df['Prov'] == prov[1]]
     
-    stats_method1_22, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2022_1, df_uprawa_2022_2, nbr_runs=10000)  
+    stats_method1_22, stats_method2_22, p_value_22 = bootstrap(metric, df_uprawa_2022_1, df_uprawa_2022_2, nbr_runs=100)  
     prov_1.append(prov[0])
     prov_2.append(prov[1])
     avg_1.append(stats_method1_22['avg_metric'])
@@ -70,7 +76,7 @@ for prov in province:
     df_uprawa_2021 = df["X2a"][df['Prov'] == prov]
     df_uprawa_2022 = df["X2b"][df['Prov'] == prov]
     
-    stats_method1_21, stats_method2_22, p_value = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=10000)  
+    stats_method1_21, stats_method2_22, p_value = bootstrap(metric, df_uprawa_2021, df_uprawa_2022, nbr_runs=100)  
     prov_1.append(prov)
     prov_2.append(prov)
     avg_1.append(stats_method1_21['avg_metric'])
@@ -89,3 +95,7 @@ df_sum_yr_delta = pd.DataFrame(data = {'YR-YR': '2021-2022',
                                       'AVG_AREA_2': avg_2,
                                       'CI_2': conf_inter_2,
                                       'P_VALUE': p_value_list})
+
+#zapisz dane
+df_sum_prov_comb.to_csv(r'data/processed/between_provinces.csv', encoding='UTF-8')
+df_sum_yr_delta.to_csv(r'data/processed/year_to_year_province.csv', encoding = 'UTF-8')
